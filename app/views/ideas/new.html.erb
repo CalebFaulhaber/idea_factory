@@ -1,2 +1,24 @@
 <h1>New Page</h1>
 <h2>Url: /ideas/new</h2>
+
+<%= form_for @idea do |form| %>
+    <% if @idea.errors.present? %>
+        <p><%= @idea.errors.full_messages.join(', ') %></p>
+    <% end %>
+
+    <div>
+        <%= form.label :title %>
+        <%= form.text_field :title %>
+    </div>
+
+    <div>
+        <%= form.label :body %>
+        <%= form.text_field :body %>
+    </div>
+
+    <%= form.submit %>
+
+<% end %>
+
+
+
