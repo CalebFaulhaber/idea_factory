@@ -17,7 +17,7 @@ class IdeasController < ApplicationController
     end
 
     def create
-
+        
     end
 
     def destroy
