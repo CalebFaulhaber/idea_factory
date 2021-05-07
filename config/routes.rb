@@ -11,23 +11,31 @@ Rails.application.routes.draw do
 
   get '/', to: 'welcome#home', as: 'home'
 
-  # IDEAS
-  # index
-  get '/ideas', to: 'ideas#index', as: 'ideas'
-  # new
-  get '/ideas/new', to: 'ideas#new', as: 'new_idea'
-  # create
-  post '/ideas', to: 'ideas#create'
-  # show
-  get '/ideas/:id', to: 'ideas#show', as: 'idea'
-  # edit
-  get '/ideas/:id/edit', to: 'ideas#edit', as: 'edit_idea'
-  # update
-  patch '/ideas/:id', to: 'ideas#update'
-  # delete
-  delete '/ideas/:id', to: 'ideas#destroy'
+  # # IDEAS
+  # # index
+  # get '/ideas', to: 'ideas#index', as: 'ideas'
+  # # new
+  # get '/ideas/new', to: 'ideas#new', as: 'new_idea'
+  # # create
+  # post '/ideas', to: 'ideas#create'
+  # # show
+  # get '/ideas/:id', to: 'ideas#show', as: 'idea'
+  # # edit
+  # get '/ideas/:id/edit', to: 'ideas#edit', as: 'edit_idea'
+  # # update
+  # patch '/ideas/:id', to: 'ideas#update'
+  # # delete
+  # delete '/ideas/:id', to: 'ideas#destroy'
 
+  resources :ideas do
+    resources :reviews, only:[:create, :destroy]
+  end
 
+  resources :users, only:[:new, :create]
+
+  resources :sessions, only:[:new, :create]
+
+  delete '/sessions', to: 'sessions#destroy'
 
 
 
