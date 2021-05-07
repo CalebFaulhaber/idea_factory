@@ -28,6 +28,11 @@ Rails.application.routes.draw do
   delete '/ideas/:id', to: 'ideas#destroy'
 
 
+  resources :users, only:[:new, :create]
+
+  resources :sessions, only:[:new, :create]
+
+  delete '/sessions', to: 'sessions#destroy'
 
 
 

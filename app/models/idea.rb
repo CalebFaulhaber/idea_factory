@@ -1,5 +1,8 @@
 class Idea < ApplicationRecord
-    validates :title, presence: true, uniqueness: true
+
+    belongs_to :user, optional: true
+
+    validates :title, presence: true    # , uniqueness: true
 
     before_save :capitalize_title
 

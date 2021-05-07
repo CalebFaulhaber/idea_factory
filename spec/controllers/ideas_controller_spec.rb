@@ -20,7 +20,7 @@ RSpec.describe IdeasController, type: :controller do
     end
     describe '#create' do
         def valid_request
-            post(:create, params:{idea: FactoryBot.attributes_for(:idea)})
+            post(:create, params:{ idea: {title: "some unique test title", body: "this is an idea body" } })
         end
         def invalid_request
             post(:create, params:{idea: FactoryBot.attributes_for(:idea, title: nil)})

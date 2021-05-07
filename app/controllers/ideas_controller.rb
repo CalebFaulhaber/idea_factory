@@ -7,11 +7,18 @@ class IdeasController < ApplicationController
     end
 
     def create
+        # p '--------------------'
+        # p params
+        # p '--------------------'
+
+        # p idea_params
+        # p '--------------------'
+
         @idea = Idea.new idea_params
         
         if @idea.save
             flash[:notice] = "Idea created successfully"
-            redirect_to ideas_path
+            redirect_to @idea       # same as: idea_path(@idea)
         else
             render :new
         end
