@@ -8,10 +8,27 @@
 
 User.destroy_all
 Idea.destroy_all
+Review.destroy_all
 
 NUM = 10
 PASSWORD = 'supersecret'
 
+super_user = User.create(
+    first_name: 'caleb',
+    last_name: 'faul',
+    email: 'caleb@faul.com',
+    password: PASSWORD
+)
+10.times do
+    first_name = Faker::Name.first_name
+    last_name = Faker::Name.last_name
+    User.create(
+        first_name: first_name,
+        last_name: last_name,
+        email: "#{first_name}@#{last_name}.com",
+        password: PASSWORD
+    )
+end
 
 NUM.times do
     created_at = Faker::Date.backward(days:365 * 5)
@@ -23,3 +40,8 @@ NUM.times do
         updated_at: created_at
     )
 end
+
+
+
+
+

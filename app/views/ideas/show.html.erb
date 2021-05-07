@@ -3,8 +3,26 @@
 
 <h3><%= @idea.title %></h3>
 <h4><%= @idea.body %></h4>
+<h5>Created By: <%= @idea.user&.full_name || 'DELETED' %></h5>
 <p><strong>Created At:</strong><%= @idea.created_at %></p>
 <p><strong>Updated At:</strong><%= @idea.updated_at %></p>
-<%= link_to 'Edit', edit_idea_path(@idea) %>
-<%= link_to 'Delete', idea_path(@idea), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% if can?(:crud, @idea) %>
+    <%= link_to 'Edit', edit_idea_path(@idea) %>
+    <%= link_to 'Delete', idea_path(@idea), method: :delete, data: { confirm: 'Are you sure?' } %>
+<% end %>
+
+<%= render 'reviews/form' %>
+
+<% @reviews.each do |review| %>
+    <%= review.rating %>
+    <%= review.body %>
+    <small><%= time_ago_in_words(review.created_at) %></small><br>
+    <small>Reviewed By: <%= review.user&.full_name || 'Deleted' %></small><br>
+    <% if can? :crud, review %>
+        <%= button_to('Delete', idea_review_path(@idea, review),
+                        method: :delete, data:{confirm: 'Are you sure?'}) %>
+    <% end %>
+    <hr>
+    
+<% end %>
 
